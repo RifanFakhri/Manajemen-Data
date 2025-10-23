@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController; // <-- 1. TAMBAHKAN IMPORT INI
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,16 @@ Route::get('/dashboard', function () {
     return view('pages.home_screen');
 })->name('dashboard');
 
-// Rute ini untuk menampilkan halaman daftar siswa
-Route::get('/data-siswa', function () {
-    return view('pages.data_siswa');
-})->name('siswa.index');
 
-// Rute ini untuk menampilkan formulir tambah siswa baru
-Route::get('/data-siswa/tambah', function () {
-    return view('pages.siswa_form');
-})->name('siswa.create');
+// 2. HAPUS DUA RUTE LAMA DI BAWAH INI:
+// Route::get('/data-siswa', function () {
+//     return view('pages.data_siswa');
+// })->name('siswa.index');
+//
+// Route::get('/data-siswa/tambah', function () {
+//     return view('pages.siswa_form');
+// })->name('siswa.create');
+
+
+// 3. GANTI DENGAN SATU BARIS INI:
+Route::resource('data-siswa', SiswaController::class)->names('siswa');

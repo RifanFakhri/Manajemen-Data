@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form id="siswaForm" action="#" method="POST" class="mt-6">
+    <form id="siswaForm" action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data" class="mt-6">
         @csrf
         <div class="grid md:grid-cols-3 gap-8">
 
@@ -26,19 +26,31 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
                             <label for="nama_depan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Depan</label>
-                            <input type="text" id="nama_depan" name="nama_depan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan nama depan" required>
+                            <input type="text" id="nama_depan" name="nama_depan" value="{{ old('nama_depan') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan nama depan" required>
+                            @error('nama_depan')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="nama_belakang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Belakang</label>
-                            <input type="text" id="nama_belakang" name="nama_belakang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan nama belakang" required>
+                            <input type="text" id="nama_belakang" name="nama_belakang" value="{{ old('nama_belakang') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan nama belakang" required>
+                            @error('nama_belakang')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="nisn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NISN</label>
-                            <input type="text" id="nisn" name="nisn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan NISN (10 angka)" required>
+                            <input type="text" id="nisn" name="nisn" value="{{ old('nisn') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan NISN (10 angka)" required>
+                            @error('nisn')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="tanggal_lahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
-                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                            @error('tanggal_lahir')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -47,31 +59,49 @@
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Data Kontak (Wali)</h2>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="kontak_broj" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Kontak</label>
-                            <input type="tel" id="kontak_broj" name="kontak_broj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Contoh: 08123456789" required>
+                            <label for="nomor_kontak" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Kontak</label>
+                            <input type="tel" id="nomor_kontak" name="nomor_kontak" value="{{ old('nomor_kontak') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Contoh: 08123456789" required>
+                            @error('nomor_kontak')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
-                         <div>
+                        <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan email wali">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan email wali">
+                            @error('email')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
-                         <div class="sm:col-span-2">
+                        <div class="sm:col-span-2">
                             <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan alamat lengkap">
+                            <input type="text" id="alamat" name="alamat" value="{{ old('alamat') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan alamat lengkap">
+                            @error('alamat')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="kota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kota/Kabupaten</label>
-                            <input type="text" id="kota" name="kota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan kota">
+                            <input type="text" id="kota" name="kota" value="{{ old('kota') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan kota">
+                            @error('kota')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
-                         <div>
+                        <div>
                             <label for="kode_pos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
-                            <input type="text" id="kode_pos" name="kode_pos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan kode pos">
+                            <input type="text" id="kode_pos" name="kode_pos" value="{{ old('kode_pos') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Masukkan kode pos">
+                            @error('kode_pos')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
-                         <div class="sm:col-span-2">
+                        <div class="sm:col-span-2">
                             <label for="negara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Negara</label>
                             <select id="negara" name="negara" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                                <option selected value="Indonesia">Indonesia</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="Indonesia" {{ old('negara', 'Indonesia') == 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
+                                <option value="Lainnya" {{ old('negara') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                             </select>
+                            @error('negara')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -92,9 +122,12 @@
                                 <p class="text-xs text-gray-500 dark:text-gray-400">PDF, PNG, atau JPG (maks. 2MB)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">(Akta Lahir / Kartu Keluarga)</p>
                             </div>
-                            <input id="dropzone-file" type="file" class="hidden" />
+                            <input id="dropzone-file" name="dokumen" type="file" class="hidden" />
                         </label>
                     </div> 
+                    @error('dokumen')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
@@ -108,9 +141,12 @@
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Lampirkan foto</span></p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">JPG atau PNG (maks. 2MB)</p>
                             </div>
-                            <input id="foto-profil" type="file" class="hidden" />
+                            <input id="foto-profil" name="foto_profil" type="file" class="hidden" />
                         </label>
                     </div>
+                    @error('foto_profil')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
             </div>
