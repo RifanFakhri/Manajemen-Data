@@ -44,6 +44,7 @@ class SiswaController extends Controller
             'tanggal_lahir' => 'required|date',
             'nomor_kontak'  => 'required|string|max:15',
             'email'         => 'nullable|email|max:255|unique:siswas', // unique di tabel siswas
+            'jurusan'       => 'nullable|string|in:TKJ,RPL,MM,TJA', // <-- INI TAMBAHAN
             'alamat'        => 'nullable|string',
             'kota'          => 'nullable|string|max:100',
             'kode_pos'      => 'nullable|string|max:10',
@@ -107,6 +108,7 @@ class SiswaController extends Controller
             'tanggal_lahir' => 'required|date',
             'nomor_kontak'  => 'required|string|max:15',
             'negara'        => 'required|string',
+            'jurusan'       => 'nullable|string|in:TKJ,RPL,MM,TJA', // <-- INI TAMBAHAN
 
             // INI BAGIAN PENTING YANG DIPERBAIKI:
             'nisn' => [
@@ -191,3 +193,4 @@ class SiswaController extends Controller
         }
     }
 }
+

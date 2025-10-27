@@ -29,6 +29,7 @@ class Siswa extends Model
         'negara',
         'dokumen_path',     // <-- Ini penting
         'foto_profil_path', // <-- Ini penting
+        'jurusan',
     ];
 
     /**

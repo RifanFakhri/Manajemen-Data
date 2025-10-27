@@ -1,6 +1,17 @@
 @extends('layout.home') {{-- Sesuaikan dengan nama layout Anda --}}
 
 @section('content')
+
+{{-- DITAMBAHKAN: Definisi $jurusanList agar bisa dipakai di tabel dan modal --}}
+@php
+    $jurusanList = [
+        'TKJ' => 'Teknik Komputer Jaringan',
+        'RPL' => 'Rekayasa Perangkat Lunak',
+        'MM'  => 'Multimedia',
+        'TJA' => 'Teknik Jaringan Akses',
+    ];
+@endphp
+
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Daftar Siswa</h1>
         
@@ -41,6 +52,7 @@
                     <th scope="col" class="px-6 py-3">Foto</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">NISN</th>
+                    <th scope="col" class="px-6 py-3">Jurusan</th> {{-- DITAMBAHKAN --}}
                     <th scope="col" class="px-6 py-3">Kontak</th>
                     <th scope="col" class="px-6 py-3">Dokumen</th>
                     <th scope="col" class="px-6 py-3">Aksi</th>
@@ -61,6 +73,12 @@
                         {{ $siswa->nama_lengkap }}
                     </td>
                     <td class="px-6 py-4">{{ $siswa->nisn }}</td>
+
+                    {{-- DITAMBAHKAN: Menampilkan nama jurusan berdasarkan key --}}
+                    <td class="px-6 py-4">
+                        {{ $jurusanList[$siswa->jurusan] ?? $siswa->jurusan }}
+                    </td>
+
                     <td class="px-6 py-4">{{ $siswa->nomor_kontak }}</td>
                     <td class="px-6 py-4">
                         {{-- Gunakan Accessor 'dokumen_url' dari Model --}}
@@ -144,8 +162,22 @@
                                             <label for="tanggal_lahir-{{ $siswa->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
                                             <input type="date" name="tanggal_lahir" id="tanggal_lahir-{{ $siswa->id }}" value="{{ old('tanggal_lahir', $siswa->tanggal_lahir) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                                         </div>
+                                        
+                                        {{-- DITAMBAHKAN: Dropdown Jurusan --}}
+                                        <div class="col-span-1">
+                                            <label for="jurusan-{{ $siswa->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
+                                            <select id="jurusan-{{ $siswa->id }}" name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                                <option value="">-- Pilih Jurusan --</option>
+                                                @foreach ($jurusanList as $key => $value)
+                                                    <option value="{{ $key }}" {{ old('jurusan', $siswa->jurusan) == $key ? 'selected' : '' }}>
+                                                        {{ $value }} ({{ $key }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
                                         {{-- Nomor Kontak --}}
-                                         <div class="col-span-1">
+                                        <div class="col-span-1">
                                             <label for="nomor_kontak-{{ $siswa->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Kontak</label>
                                             <input type="text" name="nomor_kontak" id="nomor_kontak-{{ $siswa->id }}" value="{{ old('nomor_kontak', $siswa->nomor_kontak) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                                         </div>
@@ -184,7 +216,7 @@
                                             @if($siswa->dokumen_url)
                                                 <div class="mt-1 text-xs text-gray-500 dark:text-gray-300">Dokumen saat ini: <a href="{{ $siswa->dokumen_url }}" target="_blank" class="text-blue-500 hover:underline">Lihat</a> (Kosongkan jika tidak ingin ganti)</div>
                                             @else
-                                                 <div class="mt-1 text-xs text-gray-500 dark:text-gray-300">Belum ada dokumen. (Kosongkan jika tidak ingin ganti)</div>
+                                                    <div class="mt-1 text-xs text-gray-500 dark:text-gray-300">Belum ada dokumen. (Kosongkan jika tidak ingin ganti)</div>
                                             @endif
                                         </div>
                                     </div>
@@ -211,7 +243,8 @@
 
                 @empty
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                    {{-- DIUBAH: Colspan disesuaikan menjadi 7 --}}
+                    <td colspan="7" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                         Belum ada data siswa.
                     </td>
                 </tr>
@@ -245,4 +278,3 @@
 @endsection
 
 {{-- Blok @push('scripts') yang sebelumnya ada di sini, sudah dihapus --}}
-

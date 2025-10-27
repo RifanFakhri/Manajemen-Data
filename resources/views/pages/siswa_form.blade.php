@@ -1,6 +1,17 @@
 @extends('layout.home')
 
 @section('content')
+
+{{-- Kita definisikan list jurusan di sini agar bisa dipakai di dropdown --}}
+@php
+    $jurusanList = [
+        'TKJ' => 'Teknik Komputer Jaringan',
+        'RPL' => 'Rekayasa Perangkat Lunak',
+        'MM'  => 'Multimedia',
+        'TJA' => 'Teknik Jaringan Akses',
+    ];
+@endphp
+
 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
 
     <div class="flex justify-between items-center pb-4 border-b dark:border-gray-700">
@@ -49,6 +60,24 @@
                             <label for="tanggal_lahir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
                             <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                             @error('tanggal_lahir')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        
+                        {{-- ================================= --}}
+                        {{-- JURUSAN (DROPDOWN BARU) --}}
+                        {{-- ================================= --}}
+                        <div class="sm:col-span-2">
+                            <label for="jurusan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
+                            <select id="jurusan" name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                                <option value="" {{ old('jurusan') == '' ? 'selected' : '' }}>-- Pilih Jurusan --</option>
+                                @foreach ($jurusanList as $key => $value)
+                                    <option value="{{ $key }}" {{ old('jurusan') == $key ? 'selected' : '' }}>
+                                        {{ $value }} ({{ $key }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('jurusan')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
