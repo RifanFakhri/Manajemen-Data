@@ -43,7 +43,9 @@ class Siswa extends Model
         'foto_profil_url',
         'dokumen_url'
     ];
-
+    protected $casts = [
+        'tanggal_lahir' => 'date',
+    ];
     //======================================
     // ACCESSOR UNTUK NAMA LENGKAP
     //======================================
